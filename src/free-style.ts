@@ -484,6 +484,10 @@ export class FreeStyle extends Cache<Rule | Style> implements Container<FreeStyl
 /**
  * Exports a simple function to create a new instance.
  */
-export function create (hash = stringHash, debug = process.env['NODE_ENV'] !== 'production') {
+export function create (
+  hash = stringHash,
+  debug = process.env['NODE_ENV'] !== 'production' ||
+            !(!process.env['FREESTYLE_DEBUG'])
+) {
   return new FreeStyle(hash, debug)
 }
