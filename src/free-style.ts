@@ -245,7 +245,13 @@ function composeStyles (container: Cache<Style | Rule>, selector: string, styles
  * Get the styles string for a container class.
  */
 function getStyles (container: FreeStyle | Rule) {
-  return container.values().map(style => style.getStyles()).join('')
+  const values = container.values();
+  console.error(`getStyles() values:`, values);
+  return values.map(style => {
+    console.error('style:', style);
+    console.error('style.getStyles(): ', style.getStyles());
+    return style.getStyles()
+  }).join('')
 }
 
 /**
