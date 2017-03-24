@@ -120,16 +120,9 @@ function styleToString (key: string, value: string | number | boolean) {
 }
 
 /**
- * Sort an array of tuples by first value.
- */
-function sortTuples <T extends any[]> (value: T[]): T[] {
-  return value.sort((a, b) => a[0] > b[0] ? 1 : -1)
-}
-
-/**
  * Categorize user styles.
  */
-function parseStyles (styles: Styles, hasNestedStyles: boolean) {
+function parseStyles (styles: Styles) {
   const properties: Properties = []
   const nestedStyles: NestedStyles = []
   let isUnique = false
@@ -149,7 +142,7 @@ function parseStyles (styles: Styles, hasNestedStyles: boolean) {
 
   return {
     properties: sortTuples(properties),
-    nestedStyles: hasNestedStyles ? nestedStyles : sortTuples(nestedStyles),
+    nestedStyles,
     isUnique
   }
 }
@@ -190,7 +183,7 @@ function interpolate (selector: string, parent: string) {
  * Recursive loop building styles with deferred selectors.
  */
 function stylize (cache: Cache<any>, selector: string, styles: Styles, list: [string, Style][], parent?: string) {
-  const { properties, nestedStyles, isUnique } = parseStyles(styles, !!selector)
+  const { properties, nestedStyles, isUnique } = parseStyles(styles)
   const styleString = stringifyProperties(properties)
   let pid = styleString
 
@@ -265,7 +258,7 @@ export class Cache <T extends Container<any>> {
 
   changeId = 0
 
-  private _children = (new WeakMap()) as WeakMap<String, T> & { [id: string]: T };
+  private _children: { [id: string]: T } = {}
   private _keys: string[] = []
   private _counters: { [id: string]: number } = {}
 
