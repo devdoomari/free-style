@@ -265,7 +265,7 @@ export class Cache <T extends Container<any>> {
 
   changeId = 0
 
-  private _children: { [id: string]: T } = {}
+  private _children = (new WeakMap()) as WeakMap<String, T> & { [id: string]: T };
   private _keys: string[] = []
   private _counters: { [id: string]: number } = {}
 
