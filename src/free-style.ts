@@ -340,6 +340,7 @@ export class Cache <T extends Container<any>> {
   }
 
   merge <U extends Cache<any>> (cache: U) {
+    console.error(`FreeStyle Cache.merge::`, cache)
     for (const value of cache.values()) {
       this.add(value)
     }
