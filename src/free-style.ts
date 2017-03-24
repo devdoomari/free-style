@@ -122,9 +122,9 @@ function styleToString (key: string, value: string | number | boolean) {
 /**
  * Sort an array of tuples by first value.
  */
-function sortTuples <T extends any[]> (value: T[]): T[] {
-  return value.sort((a, b) => a[0] > b[0] ? 1 : -1)
-}
+// function sortTuples <T extends any[]> (value: T[]): T[] {
+//   return value.sort((a, b) => a[0] > b[0] ? 1 : -1)
+// }
 
 /**
  * Categorize user styles.
@@ -146,10 +146,10 @@ function parseStyles (styles: Styles, hasNestedStyles: boolean) {
       properties.push([hyphenate(key.trim()), value])
     }
   }
-
+  console.log(hasNestedStyles);
   return {
-    properties: sortTuples(properties),
-    nestedStyles: hasNestedStyles ? nestedStyles : sortTuples(nestedStyles),
+    properties: properties,
+    nestedStyles: nestedStyles, // hasNestedStyles ? nestedStyles : sortTuples(nestedStyles),
     isUnique
   }
 }
