@@ -141,7 +141,7 @@ function parseStyles (styles: Styles) {
   }
 
   return {
-    properties: sortTuples(properties),
+    properties,
     nestedStyles,
     isUnique
   }
