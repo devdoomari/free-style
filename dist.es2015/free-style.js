@@ -228,7 +228,7 @@ var Cache = (function () {
     function Cache(hash) {
         this.hash = hash;
         this.changeId = 0;
-        this._children = {};
+        this._children = (new WeakMap());
         this._keys = [];
         this._counters = {};
     }
